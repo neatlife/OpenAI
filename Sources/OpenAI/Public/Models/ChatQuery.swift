@@ -1,6 +1,6 @@
 //
 //  ChatQuery.swift
-//  
+//
 //
 //  Created by Sergii Kryvoblotskyi on 02/04/2023.
 //
@@ -205,7 +205,7 @@ public struct ChatQueryFunctionCall: Codable, Equatable {
 
 public struct ChatQuery: Equatable, Codable, Streamable {
     /// ID of the model to use. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported.
-    public let model: Model
+    public var model: Model
     /// The messages to generate chat completions for
     public let messages: [Chat]
     /// A list of functions the model may generate JSON inputs for.
@@ -230,6 +230,10 @@ public struct ChatQuery: Equatable, Codable, Streamable {
     public let logitBias: [String:Int]?
     /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
     public let user: String?
+    /// for GPT4Free
+    public var provider: String?
+    /// for GPT4Free
+    public var ignore_web: String?
     
     var stream: Bool = false
 
@@ -274,9 +278,11 @@ public struct ChatQuery: Equatable, Codable, Streamable {
         case frequencyPenalty = "frequency_penalty"
         case logitBias = "logit_bias"
         case user
+        case provider
+        case ignore_web
     }
     
-  public init(model: Model, messages: [Chat], functions: [ChatFunctionDeclaration]? = nil, functionCall: FunctionCall? = nil, temperature: Double? = nil, topP: Double? = nil, n: Int? = nil, stop: [String]? = nil, maxTokens: Int? = nil, presencePenalty: Double? = nil, frequencyPenalty: Double? = nil, logitBias: [String : Int]? = nil, user: String? = nil, stream: Bool = false) {
+  public init(model: Model, messages: [Chat], functions: [ChatFunctionDeclaration]? = nil, functionCall: FunctionCall? = nil, temperature: Double? = nil, topP: Double? = nil, n: Int? = nil, stop: [String]? = nil, maxTokens: Int? = nil, presencePenalty: Double? = nil, frequencyPenalty: Double? = nil, logitBias: [String : Int]? = nil, user: String? = nil, stream: Bool = false, provider: String? = nil, ignore_web: String? = nil) {
         self.model = model
         self.messages = messages
         self.functions = functions
@@ -291,5 +297,7 @@ public struct ChatQuery: Equatable, Codable, Streamable {
         self.logitBias = logitBias
         self.user = user
         self.stream = stream
+        self.provider = provider
+        self.ignore_web = ignore_web
     }
 }
