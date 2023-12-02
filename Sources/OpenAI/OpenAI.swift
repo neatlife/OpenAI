@@ -164,7 +164,7 @@ extension OpenAI {
 //        components.path = path
 //        return components.url!
         
-        return URL(string: "\(configuration.host)\(path)")!
+        return URL(string: "https://\(configuration.host)\(path)")!
     }
 }
 
