@@ -25,7 +25,7 @@ public struct ChatStreamResult: Codable, Equatable {
             }
         }
         
-        public let index: Int
+        public let index: Int?
         public let delta: Delta
         public let finishReason: String?
         
